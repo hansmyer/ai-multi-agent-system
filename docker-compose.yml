@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  ai-multi-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-multi-agent
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    command: python main.py
